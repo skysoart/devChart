@@ -14,9 +14,7 @@ export default async function Home() {
             devChart
           </h1>
           <p className="text-lg text-gray-600 mt-4 leading-relaxed">
-            A simple Kanban board to organize tasks, assign work to members,
-            and keep track of what&apos;s getting done. Built for student clubs
-            that need to ship, not just plan.
+            Create tasks, assign them to members, set deadlines and track progress as things get done.
           </p>
 
           <div className="flex flex-wrap gap-2 mt-5">
