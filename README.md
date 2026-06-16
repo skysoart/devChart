@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# devChart
 
-## Getting Started
+A task management web app with a Kanban board. Fork of [ChinmayBabu/devChart](https://github.com/ChinmayBabu/devChart) extended with drag-and-drop task stages, member assignment, due date tracking and inline task editing.
 
-First, run the development server:
+**Live:** [dev-chart-tau.vercel.app](https://dev-chart-tau.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+**Kanban Board**
+Tasks are organized into three columns: To Do, In Progress and Done. You can drag tasks between columns and the status is saved to the database instantly.
+
+**Member Assignment**
+Each task can be assigned to a team member. The assignee shows up as a tag on the task card.
+
+**Due Dates with Overdue Alerts**
+Tasks can have a due date. If a task is past its deadline and not in the Done column, it gets flagged with an overdue warning in red.
+
+**Inline Task Editing**
+Click any task card to open an edit modal where you can update the title, description, priority, status, assignee and due date.
+
+**Priority Sorting**
+Tasks within each column are automatically sorted by priority. High priority tasks appear at the top.
+
+**Task Deletion**
+Tasks can be deleted from the board with an inline confirmation.
+
+## Tech Stack
+
+- **Next.js 16** (React 19, App Router)
+- **MongoDB Atlas** with Mongoose
+- **Tailwind CSS v4**
+- **@hello-pangea/dnd** for drag and drop
+- **Vercel** for deployment
+
+## Setup Instructions
+
+1. Fork and clone the repo
+
+```
+git clone https://github.com/skysoart/devChart.git
+cd devChart
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Create a `.env.local` file in the root directory and add your MongoDB connection string
 
-## Learn More
+```
+MONGODB_URI=your_mongodb_connection_string
+```
 
-To learn more about Next.js, take a look at the following resources:
+You can get this from MongoDB Atlas. Go to your cluster, click Connect and copy the connection string. Replace the password and database name accordingly.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Run the development server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+npm run dev
+```
 
-## Deploy on Vercel
+5. Open `http://localhost:3000` in your browser
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deployed on Vercel at [dev-chart-tau.vercel.app](https://dev-chart-tau.vercel.app/)
+
+To deploy your own:
+
+1. Push the repo to GitHub
+2. Go to [vercel.com](https://vercel.com) and sign in with GitHub
+3. Import your repo and add `MONGODB_URI` as an environment variable in the project settings
+4. Click Deploy
+
+## Screenshots
+
+### Landing Page
+![Landing Page](./screenshots/landing.png)
+
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
+
+### Drag and Drop
+![Drag and Drop](./screenshots/drag-drop.png)
+
+### Edit Task Modal
+![Edit Modal](./screenshots/edit-modal.png)
+
+### Delete Confirmation
+![Delete Confirmation](./screenshots/delete-confirm.png)
+
+### Create Task
+![Create Task](./screenshots/create-task.png)
+
+## Known Limitations
+
+- There is no user authentication. Anyone with the link can create, edit and delete tasks.
+- Drag and drop reordering within the same column does not persist because tasks are sorted by priority automatically.
+- The assignee field is a free text input rather than a dropdown of registered members.
