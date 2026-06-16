@@ -8,6 +8,9 @@ const CreateTask = () => {
 const [title,setTitle] = useState("");
 const [description,setDescription] = useState("");
 const [priority,setPriority] = useState("low");
+const [assignee,setAssignee] = useState("");
+const [dueDate,setDueDate] = useState("");
+const [message, setMessage] = useState("");
 
 async function handleSubmit(event: React.FormEvent){
     event.preventDefault();
@@ -15,11 +18,17 @@ async function handleSubmit(event: React.FormEvent){
     try{
         const response = await fetch("/api/tasks",{
             method: "POST",
-
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ title, description, priority }),
+            body: JSON.stringify({
+                title,
+                description,
+                priority,
+                status: "todo",
+                assignee,
+                dueDate: dueDate ? new Date(dueDate) : null,
+            }),
         });
 
         const data = await response.json();
@@ -28,11 +37,14 @@ async function handleSubmit(event: React.FormEvent){
         setTitle("");
         setDescription("");
         setPriority("low");
-
-        alert("Task created successfully!");
+        setAssignee("");
+        setDueDate("");
+        setMessage("✅ Task created successfully!");
+        setTimeout(() => setMessage(""), 3000);
     } catch (error) {
         console.error("Error creating task:", error);
-        alert("Failed to create task.");
+        setMessage("❌ Failed to create task.");
+        setTimeout(() => setMessage(""), 3000);
     }
 }
 
@@ -60,7 +72,19 @@ async function handleSubmit(event: React.FormEvent){
                     <option value="high">High</option>
                 </select>
 
+                <h3 className="text-2xl">Assign to someone</h3>
+                <input type="text" placeholder="Member name (optional)" value={assignee} onChange={(event)=>{setAssignee(event.target.value)}} className="w-full p-3 bg-white  rounded-xl focus:outline-none focus:ring-2 focus:ring-white appearance-none" />
+
+                <h3 className="text-2xl">Due date</h3>
+                <input type="date" value={dueDate} onChange={(event)=>{setDueDate(event.target.value)}} className="w-full p-3 bg-white  rounded-xl focus:outline-none focus:ring-2 focus:ring-white appearance-none" />
+
                 <button type="submit"  className="w-full p-3 bg-teal-500 text-white font-bold rounded-xl hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-white appearance-none" >Create Task</button>
+
+                {message && (
+                    <div className={`w-full p-3 rounded-xl text-center font-bold ${message.includes("✅") ? "bg-green-200 text-green-800" : "bg-red-200 text-red-800"}`}>
+                        {message}
+                    </div>
+                )}
 
             </form>
         </div>

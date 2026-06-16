@@ -1,27 +1,47 @@
-import Navbar from "@/components/Navbar"
-import TaskCard from "@/components/TaskCard";
+import Navbar from "@/components/Navbar";
+import Link from "next/link";
 import connectDB from "@/lib/mongodb";
 
-
-
 export default async function Home() {
-
   await connectDB();
 
   return (
     <div>
       <Navbar />
-      <div className="flex flex-wrap items-center justify-center  m-3">
-        <div className="max-w-xl">
-          <h1 className="text-9xl font-bold text-teal-200 mx-18 mt-18 text-outline-black">
+      <div className="flex flex-wrap items-center justify-center min-h-[calc(100vh-64px)] px-6 gap-8">
+        <div className="max-w-lg">
+          <h1 className="text-8xl md:text-9xl font-bold text-teal-200 text-outline-black leading-tight">
             devChart
           </h1>
-          <div className="mx-18 font-medium text-2xl mt-5">
-            <h3>An easy tool for managing your tasks and collaborating with your team!!</h3>
-            <h2>Have a Nice Time Building...</h2>
+          <p className="text-lg text-gray-600 mt-4 leading-relaxed">
+            A simple Kanban board to organize tasks, assign work to members,
+            and keep track of what&apos;s getting done. Built for student clubs
+            that need to ship, not just plan.
+          </p>
+
+          <div className="flex flex-wrap gap-2 mt-5">
+            <span className="text-sm bg-black text-teal-200 px-3 py-1 rounded-full font-medium">Drag &amp; Drop</span>
+            <span className="text-sm bg-black text-teal-200 px-3 py-1 rounded-full font-medium">Member Assignment</span>
+            <span className="text-sm bg-black text-teal-200 px-3 py-1 rounded-full font-medium">Due Dates</span>
+            <span className="text-sm bg-black text-teal-200 px-3 py-1 rounded-full font-medium">Priority Sorting</span>
+            <span className="text-sm bg-black text-teal-200 px-3 py-1 rounded-full font-medium">Inline Editing</span>
+          </div>
+
+          <div className="flex gap-3 mt-8">
+            <Link href="/dashboard">
+              <button className="rounded-xl py-3 px-6 bg-black text-teal-200 font-bold text-lg hover:bg-gray-800 transition-colors">
+                Open Board →
+              </button>
+            </Link>
+            <Link href="/create-task">
+              <button className="rounded-xl py-3 px-6 border-2 border-black font-bold text-lg hover:bg-black hover:text-teal-200 transition-colors">
+                Create Task
+              </button>
+            </Link>
           </div>
         </div>
-        <img src="/logo.svg" alt="Logo" className="w-xl h-auto mx-auto my-6" />
+
+        <img src="/logo.svg" alt="devChart logo" className="w-80 md:w-96 h-auto" />
       </div>
     </div>
   );
