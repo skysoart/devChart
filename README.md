@@ -1,30 +1,30 @@
 # devChart
 
-A task management web app with a Kanban board. Fork of [ChinmayBabu/devChart](https://github.com/ChinmayBabu/devChart) extended with drag-and-drop task stages, member assignment, due date tracking and inline task editing.
+A task management web app with a Kanban board with drag-and-drop task stages, member assignment, due date tracking and inline task editing.
 
 **Live:** [dev-chart-tau.vercel.app](https://dev-chart-tau.vercel.app/)
 
 ## Features
 
-**Kanban Board**
+**Kanban Board**:
 Tasks are organized into three columns: To Do, In Progress and Done. You can drag tasks between columns and the status is saved to the database instantly.
 
-**Member Assignment**
+**Member Assignment**:
 Each task can be assigned to a team member. The assignee shows up as a tag on the task card.
 
-**Due Dates with Overdue Alerts**
+**Due Dates with Overdue Alerts**:
 Tasks can have a due date. If a task is past its deadline and not in the Done column, it gets flagged with an overdue warning in red.
 
-**Inline Task Editing**
+**Inline Task Editing**:
 Click any task card to open an edit modal where you can update the title, description, priority, status, assignee and due date.
 
-**Priority Sorting**
+**Priority Sorting**:
 Tasks within each column are automatically sorted by priority. High priority tasks appear at the top.
 
-**Task Deletion**
+**Task Deletion**:
 Tasks can be deleted from the board with an inline confirmation.
 
-## Tech Stack
+## Tech Stack:
 
 - **Next.js 16** (React 19, App Router)
 - **MongoDB Atlas** with Mongoose
@@ -32,7 +32,7 @@ Tasks can be deleted from the board with an inline confirmation.
 - **@hello-pangea/dnd** for drag and drop
 - **Vercel** for deployment
 
-## Setup Instructions
+## Setup Instructions:
 
 1. Fork and clone the repo
 
@@ -63,7 +63,7 @@ npm run dev
 
 5. Open `http://localhost:3000` in your browser
 
-## Deployment
+## Deployment:
 
 Deployed on Vercel at [dev-chart-tau.vercel.app](https://dev-chart-tau.vercel.app/)
 
@@ -74,7 +74,7 @@ To deploy your own:
 3. Import your repo and add `MONGODB_URI` as an environment variable in the project settings
 4. Click Deploy
 
-## Screenshots
+## Screenshots:
 
 ### Landing Page
 ![Landing Page](./screenshots/landing.png)
@@ -99,3 +99,5 @@ To deploy your own:
 - There is no user authentication. Anyone with the link can create, edit and delete tasks.
 - Drag and drop reordering within the same column does not persist because tasks are sorted by priority automatically.
 - The assignee field is a free text input rather than a dropdown of registered members.
+- The form does not check for data. An empty task creation would just say task created successfully but no task will be created.
+- No security measures for when two people are trying to edit a single task simultaneously. (Have not tested it yet as of the moment of submission)
